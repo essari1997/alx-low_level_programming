@@ -17,9 +17,9 @@ for (tho = 0 ; tho < 10 ; tho++)
 {
 	for (hun = 0 ; hun <= 10 ; hun++)
 	{
-		for (ten = tho ; ten < 10 ; ten++)
+		for (ten = tho + 1 ; ten < 10 ; ten++)
 		{
-			for (bas = hun ; bas < 10 ; bas++)
+			for (bas = hun + 1 ; bas < 10 ; bas++)
 			{
 				putchar('0' + tho);
 				putchar('0' + hun);
