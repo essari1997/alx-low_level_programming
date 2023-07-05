@@ -13,7 +13,7 @@ int palindrome(char str[], int start, int end)
 		return (1);
 	if (str[start] != str[end])
 		return (0);
-	if (start < end + 1)
+	if (start <= end)
 		return (palindrome(str, start + 1, end - 1));
 }
 
