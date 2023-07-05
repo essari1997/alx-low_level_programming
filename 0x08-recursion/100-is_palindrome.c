@@ -15,6 +15,7 @@ int palindrome(char str[], int start, int end)
 		return (0);
 	if (start <= end || start < end + 1)
 		return (palindrome(str, start + 1, end - 1));
+	return (1);
 }
 
 /**
