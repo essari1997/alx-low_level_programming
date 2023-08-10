@@ -15,7 +15,11 @@ void print_addr(char *ptr)
 {
 	int i;
 	int begin;
-	char sys;
+	char data, version, sys, osabi, type;
+	data = ptr[5];
+	type = ptr[16];
+	osabi = ptr[7];
+	version = ptr[6];
 
 	printf("  Entry point address:               0x");
 
@@ -56,7 +60,6 @@ void print_addr(char *ptr)
  * @ptr: magic.
  * Return: no return.
  */
-	char type = ptr[16];
 
 	if (ptr[5] == 1)
 		type = ptr[16];
@@ -82,7 +85,6 @@ void print_addr(char *ptr)
  * @ptr: magic.
  * Return: no return.
  */
-	char osabi = ptr[7];
 
 	printf("  OS/ABI:                            ");
 	if (osabi == 0)
@@ -96,13 +98,11 @@ void print_addr(char *ptr)
 
 	printf("  ABI Version:                       %d\n", ptr[8]);
 
-
 /**
  * print_version - prints version
  * @ptr: magic.
  * Return: no return.
  */
-	int version = ptr[6];
 
 	printf("  Version:                           %d", version);
 
@@ -116,9 +116,6 @@ void print_addr(char *ptr)
  * @ptr: magic.
  * Return: no return.
  */
-void print_data(char *ptr)
-{
-	char data = ptr[5];
 
 	printf("  Data:                              2's complement");
 	if (data == 1)
@@ -165,8 +162,6 @@ void check_sys(char *ptr)
 
 	if (sys == '2')
 		printf("  Class:                             ELF64\n");
-
-	print_data(ptr);
 	print_addr(ptr);
 }
 
