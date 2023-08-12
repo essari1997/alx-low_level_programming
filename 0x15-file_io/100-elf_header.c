@@ -21,9 +21,70 @@ void print_addr(char *ptr)
 	int version = ptr[6];
 	char data = ptr[5];
 
-	printf("  Entry point address:               0x");
-
 	sys = ptr[4] + '0';
+
+/**
+ * print_data - prints data
+ * @ptr: magic.
+ * Return: no return.
+ */
+
+	printf("  Data:                              2's complement");
+	if (data == 1)
+		printf(", little endian\n");
+	if (data == 2)
+		printf(", big endian\n");
+/**
+ * print_version - prints version
+ * @ptr: magic.
+ * Return: no return.
+ */
+	printf("  Version:                           %d", version);
+
+	if (version == EV_CURRENT)
+		printf(" (current)");
+
+	printf("\n");
+/**
+ * print_osabi - prints osabi
+ * @ptr: magic.
+ * Return: no return.
+ */
+	printf("  OS/ABI:                            ");
+	if (osabi == 0)
+		printf("UNIX - System V\n");
+	else if (osabi == 2)
+		printf("UNIX - NetBSD\n");
+	else if (osabi == 6)
+		printf("UNIX - Solaris\n");
+	else
+		printf("<unknown: %x>\n", osabi);
+
+	printf("  ABI Version:                       %d\n", ptr[8]);
+/**
+ * print_type - prints type
+ * @ptr: magic.
+ * Return: no return.
+ */
+	if (ptr[5] == 1)
+		type = ptr[16];
+	else
+		type = ptr[17];
+
+	printf("  Type:                              ");
+	if (type == 0)
+		printf("NONE (No file type)\n");
+	else if (type == 1)
+		printf("REL (Relocatable file)\n");
+	else if (type == 2)
+		printf("EXEC (Executable file)\n");
+	else if (type == 3)
+		printf("DYN (Shared object file)\n");
+	else if (type == 4)
+		printf("CORE (Core file)\n");
+	else
+		printf("<unknown: %x>\n", type);
+	printf("  Entry point address:               0x");
 	if (sys == '1')
 	{
 		begin = 26;
@@ -53,75 +114,6 @@ void print_addr(char *ptr)
 		}
 	}
 	printf("\n");
-
-/**
- * print_type - prints type
- * @ptr: magic.
- * Return: no return.
- */
-
-	if (ptr[5] == 1)
-		type = ptr[16];
-	else
-		type = ptr[17];
-
-	printf("  Type:                              ");
-	if (type == 0)
-		printf("NONE (No file type)\n");
-	else if (type == 1)
-		printf("REL (Relocatable file)\n");
-	else if (type == 2)
-		printf("EXEC (Executable file)\n");
-	else if (type == 3)
-		printf("DYN (Shared object file)\n");
-	else if (type == 4)
-		printf("CORE (Core file)\n");
-	else
-		printf("<unknown: %x>\n", type);
-
-/**
- * print_osabi - prints osabi
- * @ptr: magic.
- * Return: no return.
- */
-
-	printf("  OS/ABI:                            ");
-	if (osabi == 0)
-		printf("UNIX - System V\n");
-	else if (osabi == 2)
-		printf("UNIX - NetBSD\n");
-	else if (osabi == 6)
-		printf("UNIX - Solaris\n");
-	else
-		printf("<unknown: %x>\n", osabi);
-
-	printf("  ABI Version:                       %d\n", ptr[8]);
-
-/**
- * print_version - prints version
- * @ptr: magic.
- * Return: no return.
- */
-
-	printf("  Version:                           %d", version);
-
-	if (version == EV_CURRENT)
-		printf(" (current)");
-
-	printf("\n");
-
-/**
- * print_data - prints data
- * @ptr: magic.
- * Return: no return.
- */
-
-	printf("  Data:                              2's complement");
-	if (data == 1)
-		printf(", little endian\n");
-
-	if (data == 2)
-		printf(", big endian\n");
 }
 /**
  * print_magic - prints magic info.
