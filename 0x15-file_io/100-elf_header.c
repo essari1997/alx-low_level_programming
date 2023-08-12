@@ -15,11 +15,11 @@ void print_addr(char *ptr)
 {
 	int i;
 	int begin;
-	char data, version, sys, osabi, type;
-	data = ptr[5];
-	type = ptr[16];
-	osabi = ptr[7];
-	version = ptr[6];
+	char sys;
+	char type = ptr[16];
+	char osabi = ptr[7];
+	int version = ptr[6];
+	char data = ptr[5];
 
 	printf("  Entry point address:               0x");
 
@@ -53,7 +53,6 @@ void print_addr(char *ptr)
 		}
 	}
 	printf("\n");
-}
 
 /**
  * print_type - prints type
