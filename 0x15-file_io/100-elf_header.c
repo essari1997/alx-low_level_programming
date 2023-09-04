@@ -13,40 +13,25 @@
  */
 void print_addr(char *ptr)
 {
+	char data = ptr[5];
+	int version = ptr[6];
+	char osabi = ptr[7];
+	char type = ptr[16];
 	int i;
 	int begin;
 	char sys;
-	char type = ptr[16];
-	char osabi = ptr[7];
-	int version = ptr[6];
-	char data = ptr[5];
-
-	sys = ptr[4] + '0';
-
-/**
- * print_data - prints data
- * Return: no return.
- */
 
 	printf("  Data:                              2's complement");
 	if (data == 1)
 		printf(", little endian\n");
+
 	if (data == 2)
 		printf(", big endian\n");
-/**
- * print_version - prints version
- * Return: no return.
- */
 	printf("  Version:                           %d", version);
 
 	if (version == EV_CURRENT)
 		printf(" (current)");
-
 	printf("\n");
-/**
- * print_osabi - prints osabi
- * Return: no return.
- */
 	printf("  OS/ABI:                            ");
 	if (osabi == 0)
 		printf("UNIX - System V\n");
@@ -58,10 +43,6 @@ void print_addr(char *ptr)
 		printf("<unknown: %x>\n", osabi);
 
 	printf("  ABI Version:                       %d\n", ptr[8]);
-/**
- * print_type - prints type
- * Return: no return.
- */
 	if (ptr[5] == 1)
 		type = ptr[16];
 	else
@@ -81,6 +62,8 @@ void print_addr(char *ptr)
 	else
 		printf("<unknown: %x>\n", type);
 	printf("  Entry point address:               0x");
+
+	sys = ptr[4] + '0';
 	if (sys == '1')
 	{
 		begin = 26;
@@ -149,6 +132,7 @@ void check_sys(char *ptr)
 
 	if (sys == '2')
 		printf("  Class:                             ELF64\n");
+
 	print_addr(ptr);
 }
 
