@@ -25,7 +25,6 @@ void print_addr(char *ptr)
 
 /**
  * print_data - prints data
- * @ptr: magic.
  * Return: no return.
  */
 
@@ -36,7 +35,6 @@ void print_addr(char *ptr)
 		printf(", big endian\n");
 /**
  * print_version - prints version
- * @ptr: magic.
  * Return: no return.
  */
 	printf("  Version:                           %d", version);
@@ -47,7 +45,6 @@ void print_addr(char *ptr)
 	printf("\n");
 /**
  * print_osabi - prints osabi
- * @ptr: magic.
  * Return: no return.
  */
 	printf("  OS/ABI:                            ");
@@ -63,7 +60,6 @@ void print_addr(char *ptr)
 	printf("  ABI Version:                       %d\n", ptr[8]);
 /**
  * print_type - prints type
- * @ptr: magic.
  * Return: no return.
  */
 	if (ptr[5] == 1)
